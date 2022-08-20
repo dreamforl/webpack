@@ -10,7 +10,7 @@ module.exports = {
          * entry:需要我们在项目入口处手动引入 polyfill
          * 需要指定corejs版本
          */
-        useBuiltIns: 'usage',
+        useBuiltIns: 'entry',
         corejs: 3,
         targets: {
           chrome: '65'
