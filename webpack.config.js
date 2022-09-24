@@ -63,7 +63,7 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 1, //遇到!import回滚一个loader
+              importLoaders: 1, // 遇到!import回滚一个loader
               esModule: false,
             }
           },
@@ -77,7 +77,7 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 2 //遇到!import回滚一个loader
+              importLoaders: 2 // 遇到!import回滚一个loader
             }
           },
           'postcss-loader',
@@ -86,6 +86,7 @@ module.exports = {
       },
       {
         test: /\.js/,
+        exclude: /node_modules/,
         use: ['babel-loader']
       }
     ]
@@ -96,11 +97,11 @@ module.exports = {
     port: 3001,
     // static: false,
     // open: true,
-    allowedHosts: [ //跨域方式一，非常简单
+    allowedHosts: [ // 跨域方式一，非常简单
       'http://localhost:3000',
       'http://192.168.157.128:3000'
     ],
-    proxy: { //跨域方式二，用的很多，较复杂
+    proxy: { // 跨域方式二，用的很多，较复杂
       '/api': {
         target: 'http://192.168.157.128:3000',
         pathRewrite: {
