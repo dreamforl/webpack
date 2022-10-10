@@ -7,11 +7,10 @@ const path = require('path')
 module.exports = {
   mode: 'development',
   entry: './src/index.js',
-  // devtool: 'nosources-source-map',
   output: {
     path: path.join(__dirname, 'build'),
     filename: '[name].[chunkhash:5].js',
-    clean: true
+    clean: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -20,7 +19,7 @@ module.exports = {
       favicon: './public/favicon.ico',
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[chunkhash:5].css'
+      filename: '[name].[chunkhash:5].css',
     }),
     // 后续需要在assets中布置静态资源目录的时候使用
     // new copyWebpackPlugin({
@@ -37,7 +36,8 @@ module.exports = {
     // })
   ],
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.(eot|svg|ttf|woff)$/,
         type: 'asset/resource',
         generator: {
@@ -52,9 +52,9 @@ module.exports = {
         },
         parser: {
           dataUrlCondition: {
-            maxSize: 9 * 1024
-          }
-        }
+            maxSize: 9 * 1024,
+          },
+        },
       },
       {
         test: /\.css$/i,
@@ -65,10 +65,10 @@ module.exports = {
             options: {
               importLoaders: 1, // 遇到!import回滚一个loader
               esModule: false,
-            }
+            },
           },
-          'postcss-loader'
-        ]
+          'postcss-loader',
+        ],
       },
       {
         test: /\.scss$/i,
@@ -77,19 +77,19 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 2 // 遇到!import回滚一个loader
-            }
+              importLoaders: 2, // 遇到!import回滚一个loader
+            },
           },
           'postcss-loader',
-          'sass-loader'
-        ]
+          'sass-loader',
+        ],
       },
       {
         test: /\.js/,
         exclude: /node_modules/,
-        use: ['babel-loader']
-      }
-    ]
+        use: ['babel-loader'],
+      },
+    ],
   },
   devServer: {
     hot: true,
@@ -97,18 +97,20 @@ module.exports = {
     port: 3001,
     // static: false,
     // open: true,
-    allowedHosts: [ // 跨域方式一，非常简单
+    allowedHosts: [
+      // 跨域方式一，非常简单
       'http://localhost:3000',
-      'http://192.168.157.128:3000'
+      'http://192.168.157.128:3000',
     ],
-    proxy: { // 跨域方式二，用的很多，较复杂
+    proxy: {
+      // 跨域方式二，用的很多，较复杂
       '/api': {
         target: 'http://192.168.157.128:3000',
         pathRewrite: {
-          '^/api': 'http://192.168.157.128:3000'
-        }
-      }
-    }
+          '^/api': 'http://192.168.157.128:3000',
+        },
+      },
+    },
   },
   optimization: {
     minimizer: [

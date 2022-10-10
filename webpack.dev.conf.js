@@ -24,4 +24,5 @@ module.exports = merge(base, {
       '@': path.resolve(__dirname, 'src'),
     },
   },
+  devtool: 'inline-source-map',
 })
